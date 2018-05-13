@@ -1,0 +1,153 @@
+div.main p, ul, li {
+	line-height: 150%;
+	font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+	font-size: 13pt;
+	color: #000;
+}
+
+div.main p {
+	margin: 20px 0px 15px 0px;
+}
+
+p.howTo {
+	margin: 10px 0px 7px 0px;
+}
+
+p.howToNote {
+	margin: 0px 0px 0px 0px;
+}
+
+h1.blogTitle {
+	text-align: center;
+	margin-bottom: 33px;
+	color: orange;
+	text-shadow: 1px 2px 2px #222;
+	font-size: 30pt;
+}
+
+h2 {
+	margin: 30px 0px 20px 0px;
+}
+
+a.referenceLink {
+	color: #259;
+	font-family: monospace;
+	font-size: 12pt;
+}
+
+a.blogPostLink {
+	color: #00C738;
+}
+
+a.blogPostLink:visited {
+	color: #0AA836;
+}	
+
+span.InlineComment {
+	color: green;
+}
+
+span.Keyword {
+	color: blue;
+}
+
+span.String {
+	color: #F90;
+}
+
+img.figure {
+	display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+div.code {
+	background-color: #F0F0F0;
+	color: #111;
+	padding: 8px;
+	margin: 0 auto;
+	display: inline-block;
+	border-width: 2px;
+	font-family: "Consolas", "Courier New", monospace;
+	font-size: 10.5pt;
+	border-width: 2px;
+	border-color: black;
+	line-height: 150%;
+	width: 60%;
+	min-width: 700px;
+	margin-left: 2.5%;
+}
+
+div.diagram {
+	width: 400px;
+	height: 400px;
+	margin: 0 auto;
+}
+
+code.symbol {
+	color: #111;
+	margin: 2px;
+	padding: 0;
+	background-color: transparent;;
+	font-family: monospace;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 12pt;
+}
+
+code {
+	background-color: #F0F0F0;
+	color: #111;
+	padding: 5px;
+	margin: 7px 1px 7px 1px;
+	font-family: "Consolas", "Courier New", monospace;
+	font-size: 10pt;
+}
+
+div.main {
+	width: 60%;
+	left: 20%;
+	right: 20%;
+}
+
+div.blogTitle {
+	padding-left: 10%;
+	width: 80%;
+	left: 10%;
+	right: 10%;
+}
+
+div.dateWritten {
+	padding: 25px;
+	color: #777;
+	border-style: fixed;
+	border-top: thin double #999;
+	margin-top: 60px;
+	font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+	font-size: 14pt;
+	width: 400px;
+	text-align: center;
+}
+
+@media only screen and (max-width: 1024px) {
+	div.main {
+		width: 80%;
+		left: 10%;
+	}
+}
+
+div.imageWithDescription {
+	float: none;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 8px;
+	margin-bottom: 35px;
+	width: 550px;
+}
+
+div.imageWithDescription p {
+	text-align: center;
+    margin: 5px 0;
+    font-style: italic;
+}

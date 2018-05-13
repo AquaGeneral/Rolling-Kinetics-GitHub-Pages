@@ -1,0 +1,68 @@
+ol.tableOfContents {
+	margin-top: 15px;
+	counter-reset: item;
+}
+
+ol.tableOfContents ol {
+    counter-reset: item;
+}
+
+ol.tableOfContents li {
+    display: block;
+}
+
+ol.tableOfContents li:before {
+    content: counters(item, ".")" ";
+    counter-increment: item;
+}
+
+.main h4 {
+	color: #555;
+	font-size: 11pt;
+}
+
+.main h3 {
+	color: #222;
+}
+
+.main h2 {
+	color: #000;
+	font-size: 18pt;
+}
+
+.main p {
+	line-height: 100%;
+	margin: 5px 0px 15px 3px;
+	font-size: 12pt;
+}
+
+div.main {
+	font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+}
+
+.documentationInfo {
+	background-color: #FFF2E0;
+	margin: 0 auto;
+	padding: 10px;
+	width: 84%;
+}
+
+.documentationInfo i {
+	margin-left: 10px;
+	color: #555;
+	text-align: center;
+}
+
+table, th, td, tr {
+	border-collapse:collapse;
+	border:1px solid black;
+	padding: 5px;
+}
+
+th, td, tr {
+	
+}
+
+table td:not(:first-child) {
+    text-align: center;
+}

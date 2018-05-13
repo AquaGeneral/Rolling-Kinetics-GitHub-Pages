@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rolling Kinetics - 2D Position to 3D Position with Velocity</title>
+	<link rel="stylesheet" type="text/css" href="../main.css">
+	<link rel="stylesheet" type="text/css" href="../blog/blog-post.css">
+	<link rel="stylesheet" type="text/css" href="2d-to-3d-mouse-position/2d-to-3d-mouse-position.css">
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-36595920-2']);
+		_gaq.push(['_setDomainName', 'rollingkinetics.com']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+<body>
+	<div class="header">
+		<div class="headerDiv">
+			<div class="logo">
+				<a href="../index.html" class="logo"><h1 class="title">Rolling Kinetics</h1></a>
+				<span>Jesse Stiller's Personal Site</span>
+			</div>
+			<ul class="navigation">
+				<li class="navigation"><a href="../index.html" class="navigation">Home</a></li>
+				<li class="navigation"><a href="../blog.html" class="navigation">Blog</a></li>
+				<li class="navigation"><a href="../about.html" class="navigation">About</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="blogTitle"><h1 class="blogTitle">Screenspace to Worldspace with Perspective Direction</h1></div>
+	<div class="main">
+		<p>With Block Fuse, I spent a very long time trying to work out how to launch a projectile exactly where the player clicks. Figuring out the worldspace position from screenspace was as simple as using <a class="referenceLink" href="http://docs.unity3d.com/Documentation/ScriptReference/Camera.ScreenToWorldPoint.html">Camera.ScreenToWorldPoint</a>. The main challenge comes when the direction the projectile should be thrown created by the field of view must be taken into account.</p>
+
+		<p>ScreenToWorldPoint is dependent on the distance variable because the point is multiplied by the distance. So that should make you wonder, &ldquo;How do we find the distance the ball should be spawned when we only know the screenspace of the point?&rdquo;</p>
+
+		<p>The diagram below shows the problem visually. From the point of view (<code class="symbol">pov</code>), positions <code class="symbol">p1</code> will appear to be in the exact screen location as <code class="symbol">p2</code>; however, <code class="symbol">p2</code> will appear relatively smaller. Also, note the distances <code class="symbol">d1</code> and <code class="symbol">d2</code> vary in length.</p>
+
+		<div class="diagram">
+			<embed src="2d-to-3d-mouse-position/diagram1.svg" type="image/svg+xml"/>
+		</div>
+
+		<p>Using these two positions sampled from various distances from screenspace to worldspace, we can find the direction. The first step is find the distance between the points, which can be done by subtracting the two points. The next step is to then normalize the distance, and there, we have a vector which will set the projectile in the correct direction.</p>
+
+		<div class="code">
+			Vector3&nbsp;m&nbsp;=&nbsp;Input.mousePosition;<br />
+			Vector3&nbsp;point1&nbsp;=&nbsp;Camera.main.ScreenToWorldPoint(<span class="Keyword">new</span>&nbsp;Vector3(m.x,&nbsp;m.y,&nbsp;1f));<br />
+			Vector3&nbsp;point2&nbsp;=&nbsp;Camera.main.ScreenToWorldPoint(<span class="Keyword">new</span>&nbsp;Vector3(m.x,&nbsp;m.y,&nbsp;3f));<br />
+			Vector3&nbsp;direction&nbsp;=&nbsp;point2&nbsp;-&nbsp;point1;<br />
+			Vector3&nbsp;normalizedDirection&nbsp;=&nbsp;direction.normalized;
+		</div>
+
+		<p>To actually assign this perspective direction correction to the projectile, we can simply assign it as the initial velocity. The projectile can be thrown faster by multiplying the velocity. The exact number would be based around your game's scale. Bear in mind, the velocity is represented internally as metres per second.</p>
+
+		<h2>End Result</h2>
+		<div class="code">
+			Vector3&nbsp;m&nbsp;=&nbsp;Input.mousePosition;<br />
+			<span class="InlineComment">//&nbsp;Get&nbsp;two&nbsp;samples&nbsp;of&nbsp;where&nbsp;the&nbsp;mouse&nbsp;is&nbsp;in&nbsp;world&nbsp;space&nbsp;at&nbsp;varying&nbsp;distances</span><br />
+			Vector3&nbsp;point1&nbsp;=&nbsp;Camera.main.ScreenToWorldPoint(<span class="Keyword">new</span>&nbsp;Vector3(m.x,&nbsp;m.y,&nbsp;1));<br />
+			Vector3&nbsp;point2&nbsp;=&nbsp;Camera.main.ScreenToWorldPoint(<span class="Keyword">new</span>&nbsp;Vector3(m.x,&nbsp;m.y,&nbsp;3));<br />
+			<span class="InlineComment">//&nbsp;Spawn a projectile, in this case a ball at point1 with default (zero) rotation</span><br />
+			GameObject&nbsp;ball&nbsp;=&nbsp;Instantiate(projectile,&nbsp;p1,&nbsp;Quaternion.identity)&nbsp;<span class="Keyword">as</span>&nbsp;GameObject;<br />
+			<span class="InlineComment">//&nbsp;By&nbsp;subtracting&nbsp;both&nbsp;positions,&nbsp;we&nbsp;get&nbsp;the&nbsp;direction&nbsp;the&nbsp;projectile&nbsp;should&nbsp;travel&nbsp;at</span><br />
+			ball.rigidbody.velocity&nbsp;=&nbsp;(point2&nbsp;-&nbsp;point1).normalized&nbsp;*&nbsp;velocity;
+		</div>
+
+		<div class="dateWritten">Written on November 21, 2012</div>
+	</div>
+	<div class="footer"><h3 class="author">Jesse Stiller</h3></div>
+</body>
+</html>

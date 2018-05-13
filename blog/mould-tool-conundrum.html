@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rolling Kinetics - Mould Tool Conundrum</title>
+	<link rel="stylesheet" type="text/css" href="../main.css">
+	<link rel="stylesheet" type="text/css" href="../blog/blog-post.css">
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-36595920-2']);
+		_gaq.push(['_setDomainName', 'rollingkinetics.com']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+<body>
+	<div class="header">
+		<div class="headerDiv">
+			<div class="logo">
+				<a href="../index.html" class="logo"><h1 class="title">Rolling Kinetics</h1></a>
+				<span>Jesse Stiller's Personal Site</span>
+			</div>
+			<ul class="navigation">
+				<li class="navigation"><a href="../index.html" class="navigation">Home</a></li>
+				<li class="navigation"><a href="../blog.html" class="navigation">Blog</a></li>
+				<li class="navigation"><a href="../about.html" class="navigation">About</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="blogTitle"><h1 class="blogTitle">Terrain Former - Mould Tool Conundrum</h1></div>
+	<div class="main">
+		<h2>Introduction</h2>
+		<p>For my Unity plugin, <a href="https://www.assetstore.unity3d.com/#!/content/20052">Terrain Former</a>, I am trying to implement a mould tool which moulds the terrain around geometry, such as roads and buildings.</p>
+
+		<div class="imageWithDescription">
+			<img src="../blog/mould-tool-conundrum/start.png"/>
+			<p>The test scene.</p>
+		</div>
+
+		<h2>The Problem</h2>
+		<p>One way to accomplish this would be to use Physics.Raycast to raycast from the bottom of the terrain to the top. If the raycast hits nothing, then the terrain segment will remain at its original position. This would be done for every terrain segment. This approach works but can take up to 300 ms to just perform this step, which is unacceptable because I want this to update in realtime.</p>
+
+		<div class="imageWithDescription">
+			<img src="../blog/mould-tool-conundrum/first.png"/>
+			<p>Creating a depth map (or a heightfield to some extent) by raycasting from the bottom of the terrain up to the scene geometry.</p>
+		</div>
+
+		<p>Another important aspect of the mould tool is that the user should be able to define how far the moulding extends from the edges of geometry. I have no good idea of how to accomplish this in a performant manner with C# code alone.</p>
+
+		<div class="imageWithDescription">
+			<img src="../blog/mould-tool-conundrum/extended.png"/>
+			<p>The scene geometry extended outwards.</p>
+		</div>
+
+		<p>The next step is to blur the result which can make the entire process take over a second. Again, I want this to be able to update in realtime!</p>
+
+		<div class="imageWithDescription">
+			<img src="../blog/mould-tool-conundrum/blurred.png"/>
+			<p>The scene geometry blurred to reduce the severity of the cliffs.</p>
+		</div>
+
+		<p>This feature must work in the editor on Windows and Mac, so as far as I can tell Compute Shaders are out of the question (for now at least).</p>
+
+		<p>To summarise, the feature requires the following steps:
+		<ul>
+			<li>For every terrain vertex/segment, calculate how far any objects are from the bottom to the bottom of the terrain.</li>
+			<li>Extend out samples above based on a user-defined paramater.</li>
+			<li>Blur the result and possibly do it numerous times depending on how the user wants to smooth out the terrain.</li>
+		</ul>
+		<br/>
+		<div class="imageWithDescription">
+			<img src="../blog/mould-tool-conundrum/final.png"/>
+			<p>The intended final result.</p>
+		</div>
+
+		<h2>The Attempted Solution</h2>
+
+		<p>I have some experience with using command buffers, so I went ahead and started a quasi-GPU-based implementation of this.</p>
+
+		<p>Something very nice about using shaders for this is that I could just use the depth texture rendered by the GPU rather than raycasting from the bottom, upwards. Simply positioning the camera from the bottom of the terrain facing upwards, setting the near clip plane to 0, and the far clip to the height of the terrain will make the depth texture perfectly normalized.</p>
+
+		<p>The result is exactly what I want and it requires no actual code on my side. Okay, the next task is to extend out the geometry. A replacement shader could be used to extend out mesh vertices.</p>
+
+		<p>But when I am using a replacement shader, the command buffer is never being called. This was confirmed after removing the replacement texture, where the command buffer began to execute like it should.</p>
+
+		<p>Okay, so I can't use a replacement shader, but I could try individually drawing every mesh using CommandBuffer.DrawMesh or CommandBuffer.DrawRenderer and tell it to use our own material/shader. This works; however, now I don't have a free depth texture (unless I'm mistaken), so now I need to calculate the depth myself by returning the depth value as a colour (using the red colour channel) in the shader I'm using.</p>
+
+		<p>But that doesn't seem to work. When I issue CommandBuffer.DrawMesh or CommandBuffer.DrawRenderer with a specific material to return a certain colour, it doesn't work as expected. Instead it returns an almost 40%-darker shade, as if lighting is playing a part even though the material I am drawing the mesh with has a shader that returns a 100% white colour (for debugging):</p>
+		<div class="code">
+			fixed4 frag(v2f i) : SV_Target {<br/>
+			   &ensp;&ensp;&ensp;return fixed4(1, 1, 1, 1);<br/>
+			}
+		</div>
+		
+		<h2>Final Thoughts</h2>
+		<p>I ran into more roadblocks along the way, and to keep the post short I've left them out. It's pretty easy to see that every way I try to implement this feature, there's something that stops it from working. I'm guessing there's something simple I could do, but I need some guidance and asking on the forums yields zero replies (it is not a trivial subject after all).</p>
+
+		<div class="dateWritten">Last Modified: July 29, 2016.</div>
+	</div>
+	<div class="footer"><h3 class="author">Jesse Stiller</h3></div>
+</body>
+</html>

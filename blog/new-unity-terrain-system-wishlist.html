@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rolling Kinetics - New Unity Terrain System Wishlist</title>
+	<link rel="stylesheet" type="text/css" href="../main.css">
+	<link rel="stylesheet" type="text/css" href="../blog/blog-post.css">
+	<link rel="stylesheet" type="text/css" href="../blog/new-unity-terrain-system-wishlist.css">
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-36595920-2']);
+		_gaq.push(['_setDomainName', 'rollingkinetics.com']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+<body>
+	<div class="header">
+		<div class="headerDiv">
+			<div class="logo">
+				<a href="../index.html" class="logo"><h1 class="title">Rolling Kinetics</h1></a>
+				<span>Jesse Stiller's Personal Site</span>
+			</div>
+			<ul class="navigation">
+				<li class="navigation"><a href="../index.html" class="navigation">Home</a></li>
+				<li class="navigation"><a href="../blog.html" class="navigation">Blog</a></li>
+				<li class="navigation"><a href="../about.html" class="navigation">About</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="blogTitle"><h1 class="blogTitle">New Unity Terrain System Wishlist</h1></div>
+	<div class="main">
+		<p>
+			As the creator of Terrain Former, a manual sculpting tool for Unity that's purpose is to build upon the frustrating built-in Unity terrain tools, I know a moderate amount about Unity's terrain system's shortcomings. In this post I want to talk about them all in hopes of getting them addressed in the future versions of Unity.
+		</p>
+
+		<h3>Use a More Suitable Base Data Type for Heightmaps/Alphamps</h3>
+		<p>Unity's terrain data asset uses of a 32-bit floating point precision number for heightmaps and alphamaps, while only uses values ranging form 0.0 to 1.0, which means it's only using 25% all available values. Of the values used there are noth of 1 billion values used, which is overkill - not only that, but it would make a lot more sense to encode these values as an unsigned 16-bit integer value type instead for fixed precision, and to use half as much memory. A floating point number would contains lots of tiny fractional values close to 0 which are unnoticable for a game to make matters slightly worse again.</p>
+
+		<p>There could be an option to set which data type is used including uint16, custom 24-bit encoding and uint32. With a unsigned 16-bit integer there are 65535 unique values, meaning with a 100m (328 ft) tall terrain there would have a 1.56mm (0.06 or 1/16th inches) height step between each values which more most circumstances will be more than enough. There would be ~655 unique height values per meter in this case.
+
+		<p>Alphamaps actually are 3D-dimensional, with the depth being equal to how many textures are on the terrain at once. Once again it uses the same rang (0.0 to 1.0), but memory usage increases in three dimensions instead of two, which is already a very lot. Also I wonder if you even need much more than 8 bits (256 shades) per alpahmap layer, so much less than the 1-billion non-evenly distributed values currently used.</p>
+
+		<h3>Scalable To Meet All Needs</h3>
+		<p>Terrain Former can work across multiple terrains at once in a grid pattern (a terrain grid). The only reason this feature exists is because sometimes you want large terrains with a total resolution over 4097. This feature took me months of full-time work to implement due to the massive amount of refactoring and complexity this brings when the plugin was initially designed to handle one terrain at once. This also adds complexity to users as they have to deal with terrain grid setups, and if they change there minds it's hard to add/remove terrains to the grid, or move to only one terrain.</p>
+
+		<h3>Compression Options for Heightmaps/Alphamaps</h3>
+		<p>Unity currently applies no compression to heightmaps and alphamaps. By default Unity should losslessly compress both maps with an optin to compress them lossy for devices where storage and/or memory usage is more restricted.</p>
+
+		<h3>Allocation-Free APIs</h3>
+		<p>Calling TerrainData's GetHeights method allocates 32 bits of GC memory per sample, which can easily weight in at >200 MB even with just a regular sized terrain. There is no way to re-use the same array when gathering all terrain samples across a terrain grid. An allocation-free API would also benifit other uses such as terrain deformations or any other realtime terrain modification.</p>
+
+		<h3>GPU-based Sclupting and Painting</h3>
+		<p>Terrain Former is now multithreaded, but even then it's fairly heavily optimized C# code that wouldn't be close to matching equivalent C++ code, let alone the level of what a GPU-based implementation could bring.</p>
+
+		<h3>The Little Things, Together</h3>
+		<p>Having every little thing refactored, streamlined, made more robust, optimized and put all together into one single tool would truly be amazing. Imagine Terrain Former with more features, but also integrated directly into Unity leading to an even better, more optimized experience. I'll try to list everything else that doesn't need to be discussed in detail (yet):
+		</p>
+		<ul>
+			<li>Everything already present in Terrain Former. Including far more powerful tools that can be used on large areas of the terrain (Unity's maximum brush size is only 100 heightmap in size!) and speed improvements.</li>
+			<li>Speed improvements. Updating a heightmap internally takes a realtively long time, it surely could be made quicker.</li>
+			<li>Vegetation placement/distrubution.</li>
+			<li>Built-in instancable Sub-Surface Scattering shader for vegetation.</li>
+			<li>Instancing support in general for vegetation (already confirmed by Unity in some Unite talk)</li>
+			<li>Terrain's physics material should differ per texture, for example sand is slippery and less bouncy than cement.</li>
+		</ul>
+
+		<h3>Bonus: Voxel-based Terrains</h3>
+		<p>Voxel-based terrains would be the ultimate, allowing for concave cliffs, caves and everything in-between. The downside would be they are more complex to implement across the board, but I'd say it'll easily be worth it.</p>
+
+		<div class="dateWritten">Written on November 1, 2017, Last updated on November 5, 2017.</div>
+	</div>
+	<div class="footer"><h3 class="author">Jesse Stiller</h3></div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rolling Kinetics - Giant Bomb P3DV</title>
+	<link rel="stylesheet" type="text/css" href="../main.css">
+	<link rel="stylesheet" type="text/css" href="../projects/project.css">
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-36595920-2']);
+		_gaq.push(['_setDomainName', 'rollingkinetics.com']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+
+		function recordOutboundLink(link, category, action) {
+			try {
+				var myTracker=_gat._getTrackerByName();
+				_gaq.push(['myTracker._trackEvent', category , action ]);
+				setTimeout('document.location = "' + link.href + '"', 100)
+			}
+			catch(err){}
+		}
+	</script>
+</head>
+<body>
+	<div class="header">
+		<div class="headerDiv">
+			<div class="logo">
+				<a href="../index.html" class="logo"><h1 class="title">Rolling Kinetics</h1></a>
+				<span>Jesse Stiller's Personal Site</span>
+			</div>
+			<ul class="navigation">
+				<li class="navigation"><a href="../index.html" class="navigation">Home</a></li>
+				<li class="navigation"><a href="../blog.html" class="navigation">Blog</a></li>
+				<li class="navigation"><a href="../about.html" class="navigation">About</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="main">
+		<div class="project">
+			<div class="projectContent">
+				<div class="projectTitle">
+					<h2 class="projectTitle">Giant Bomb: Polygonally 3D Viewer</h2>
+				</div>
+				<div class="projectDescription">
+					<p class="projectDescription">
+						Search and view virtually any image accessible from Giant Bomb in an interactive and 3D view.<br/><br/>
+						I wanted to create something with the Giant Bomb API, and my first general idea was to make a photo viewer&mdash;almost like a screensaver. One of the most enjoyable parts of the project was balancing the retrieval of resulting images from a search input. I had to make sure I wasn't blocking any code to ensure the user doesn't grow sick of waiting for the images to be downloaded.</br>
+					</p>
+					<a href="giantbomb_p3dv/gbp3dv_2_full.png"><img class="projectMain" src="giantbomb_p3dv/gbp3dv_2_half.png"/></a>
+				</div>
+
+			</div>
+			<div class="projectLinksSide">
+				<div class="projectLinksTitle">
+					<h2 class="projectLinksTitle">Links</h2>
+				</div>
+				<ul class="projectLinks">
+					<li class="projectLink"><a class="projectLink" href="https://github.com/AquaGeneral/GB-3DViewer" target="blank">
+						GitHub Project
+					</a></li>
+					<li class="projectLink"><a class="projectLink" href="http://www.youtube.com/watch?v=YaHV4rYvY6o" target="blank">
+						YouTube Video #1
+					</a></li>
+				</ul>
+				<div class="projectDownloadsTitle">
+					<h2 class="projectDownloadsTitle">Demo</h2>
+				</div>
+				<div class="projectDownloads">
+					<h3><a class="projectDownloads" href="https://s3.amazonaws.com/rollingkinetics_us/GB-P3DV_Windows_v4.zip"
+						onClick="recordOutboundLink(this, 'File Download', 'GiantBombP3DV_Windows Download')">Windows (15.8 MB)</a></h3>
+					<h3><a class="projectDownloads" href="https://s3.amazonaws.com/rollingkinetics_us/GB-P3DV_Mac_v4.zip"
+						onClick="recordOutboundLink(this, 'File Download', 'GiantBombP3DV_Mac Download')">Mac OSX (16.4 MB)</a></h3>
+					<h3><a class="projectDownloads" href="https://s3.amazonaws.com/rollingkinetics_us/GB-P3DV_Linux_v4.zip"
+						onClick="recordOutboundLink(this, 'File Download', 'GiantBombP3DV_Linux Download')">Linux (17.1 MB)</a></h3>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+	<div class="footer"><h3 class="author">Jesse Stiller</h3></div>
+	</footer>
+</body>
+</html>

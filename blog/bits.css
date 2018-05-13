@@ -1,0 +1,17 @@
+table {
+    
+}
+
+input {
+    height:25px;
+    font-size: 10pt;
+    width: 100px;
+}
+
+td {
+    padding: 5px;
+    text-align: center;
+    border: #AAA solid 1px;
+    min-width: 22px;
+    font-size: 10pt;
+}

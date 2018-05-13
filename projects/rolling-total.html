@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rolling Kinetics - Rolling Total</title>
+	<link rel="stylesheet" type="text/css" href="../main.css">
+	<link rel="stylesheet" type="text/css" href="../projects/project.css">
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-36595920-2']);
+		_gaq.push(['_setDomainName', 'rollingkinetics.com']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+
+		function recordOutboundLink(link, category, action) {
+			try {
+				var myTracker=_gat._getTrackerByName();
+				_gaq.push(['myTracker._trackEvent', category , action ]);
+				setTimeout('document.location = "' + link.href + '"', 100)
+			}
+			catch(err){}
+		}
+	</script>
+</head>
+<body>
+	<div class="header">
+		<div class="headerDiv">
+			<div class="logo">
+				<a href="../index.html" class="logo"><h1 class="title">Rolling Kinetics</h1></a>
+				<span>Jesse Stiller's Personal Site</span>
+			</div>
+			<ul class="navigation">
+				<li class="navigation"><a href="../index.html" class="navigation">Home</a></li>
+				<li class="navigation"><a href="../blog.html" class="navigation">Blog</a></li>
+				<li class="navigation"><a href="../about.html" class="navigation">About</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="main">
+		<div class="project">
+			<div class="projectContent">
+				<div class="projectTitle">
+					<h2 class="projectTitle">Rolling Total</h2>
+				</div>
+				<div class="projectDescription"><p class="projectDescription">Create a budget of any kind with the speed of a calculator. Totals are updated per keystroke&mdash;similar to a spreadsheet&mdash;but in the comfort of an easy to use, focused interface.</p>
+					<img class="projectMain" src="rolling_total/rt-main.png"/>
+				</div>
+			</div>
+			<div class="projectLinksSide">
+				<div class="productFeaturesTitle">
+					<h2 class="projectLinksTitle">Features</h2>
+				</div>
+				<ul class="productFeatures"/>
+					<li class="projectLink">Per-keystroke Subtotal</li>
+					<li class="projectLink">Budget</li>
+					<li class="projectLink">Inline Item Quantity</li>
+					<li class="projectLink">...and more</li>
+				</ul>
+				<div class="projectDownloadsTitle">
+					<h2 class="projectDownloadsTitle">Official Website</h2>
+				</div>
+				<div class="projectDownloads">
+					<h><a href="http://www.softpedia.com/get/Others/Finances-Business/Rolling-Total.shtml">Softpedia Download</a></h>
+					<br/>
+					<h><a href="http://rolling-total.en.softonic.com">Softonic Download</a></h>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<footer>
+	<div class="footer"><h3 class="author">Jesse Stiller</h3></div>
+	</footer>
+</body>
+</html>

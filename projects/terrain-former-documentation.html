@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rolling Kinetics - Terrain Former Documentation</title>
+	<link rel="stylesheet" type="text/css" href="../main.css">
+	<link rel="stylesheet" type="text/css" href="../blog/blog-post.css">
+	<link rel="stylesheet" type="text/css" href="terrain-former-documentation.css">
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-36595920-2']);
+		_gaq.push(['_setDomainName', 'rollingkinetics.com']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+<body>
+	<div class="header">
+		<div class="headerDiv">
+			<div class="logo">
+				<a href="../index.html" class="logo"><h1 class="title">Rolling Kinetics</h1></a>
+				<span>Jesse Stiller's Personal Site</span>
+			</div>
+			<ul class="navigation">
+				<li class="navigation"><a href="../index.html" class="navigation">Home</a></li>
+				<li class="navigation"><a href="../blog.html" class="navigation">Blog</a></li>
+				<li class="navigation"><a href="../about.html" class="navigation">About</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="blogTitle"><h1 class="blogTitle">Terrain Former - Documentation</h1></div>
+	<div class="main">
+		<div class="documentationInfo">
+			NOTE
+			<i>
+				This documentation is not 100% complete. If you have any questions, contact me <a href="mailto:aquageneral@hotmail.com">here</a> or see <a href="../about.html">About</a>.
+				A new website is in the works which will also contain more documentation.
+			</i>
+		</div>
+
+		<ol class="tableOfContents">
+			<li>
+				<a href="#introduction">Introduction</a>
+			</li>
+			<li>
+				<a href="#tools">Tools</a>
+				<ol>
+					<li><a href="#raise-lower">Raise/Lower</a></li>
+					<li><a href="#smooth">Smooth</a></li>
+					<li>
+						<a href="#flatten">Flatten</a>
+						<ol>
+							<li><a href="#flatten-tool">Flatten</a></li>
+							<li><a href="#bridge-tool">Bridge</a></li>
+							<li><a href="#extend-tool">Extend</a></li>
+							<li><a href="#set-height-tool">Set Height</a></li>
+						</ol>
+					</li>
+				</ol>
+				<li>
+					<a href="#interactive-tools">Interactive Tools</a>
+					<ol>
+						<li><a href="#grab">Grab</a></li>
+						<li><a href="#interactive-set-height">Interactive Set Height</a></li>
+					</ol>
+				</li>
+				<li><a href="#keyboard-shortcuts">Keyboard Shortcuts</a></li>
+				<li><a href="#settings">Settings</a></li>
+			</li>
+		</ol>
+
+		<h2 id="introduction">Introduction</h2>
+		<p>To begin using Terrain Former, add the Terrain Former component onto a terrain object.</p>
+		<p>Unity's terrain editor paints on the exact area the mouse is hovering over. This causes these issues:</p>
+		<ul>
+			<li>The area being painted on is based on where the camera is facing. Meaning that painting in the same area will grow the terrain towards the camera.</li>
+			<li>It's necessary to paint from a top-down view to paint over bumps which would otherwise be occluded.</li>
+		</ul>
+
+		<p>In Terrain Former, painting terrain works differently. Rather than raycasting and using the point on the terrain that was hit (like Unity), it raycasts to an imaginary plane. This means that bumps, hills, and mountains do not affect terrain painting. The height of the virtual plane is determined by the point on the terrain when the mouse is clicked down.</p>
+
+		<h2 id="tools">Tools</h2>
+		<h3>General Settings</h3>
+		<h4>Brush Size</h4>
+		<p>This controls the size of the brush, expressed in Unity's units.</p>
+		<h4>Brush Falloff</h4>
+		<p>This determines the brush's shape. The default shape is designed to appear as a hill. The value&mdash;or height of the curve in the curve editor&mdash;indicates how much the terrain will be affected in that certain area. The left side of the curve indicates the intensity of the outer area of the brush, while the right side indicates the intensity of the inner area of the brush.</p>
+		<h4>Brush Speed</h4>
+		<p>This determines the painting speed of the brush&mdash;how quickly the brush will be applied depending on the tool.</p>
+		<br>
+		<h3 id="raise-lower">Raise/Lower</h3>
+		<p>This tool raises or lowers terrain contained within the brush circle. Holding LMB raises the terrain, whereas holding Shift+LMB lowers the terrain.</p>
+		<br>
+		<h3 id="smooth">Smooth</h3>
+		<p>As you might expect, this smooths the terrain contained within the brush circle.</p>
+		<br>
+		<h3 id="flatten">Flatten</h3>
+		<h4 id="flatten-tool">Flatten</h4>
+		<p>Flattens terrain in the brush area to the height of the terrain the mouse was initially clicked down at. (It doesn't affect terrain lower than the terrain click height.)</p>
+
+		<h4 id="bridge-tool">Bridge</h4>
+		<p>Flattens all terrain in the brush area to the height of the terrain the mouse was clicked down at. (This affects all terrain&mdash;both higher and lower than the terrain click height.)</p>
+
+		<h4 id="extend-tool">Extend</h4>
+		<p>Extends out terrain in the brush area to the height of the terrain the mouse was clicked down at. (This only affects terrain that is lower than the terrain click height.)</p>
+
+		<h4 id="set-height-tool">Set Height</h4>
+		<p>Sets the height of all terrain in the brush area based on the Set Height value.</p>
+
+		<h2 id="interactive-tools">Interactive Tools</h2>
+		<h3 id="grab">Grab</h3>
+		<p>In Raise/Lower mode, holding Ctrl+LMB or Cmd+LMB on Mac on terrain will use Grab mode. Moving the mouse up will raise the terrain in the brush area, while moving the mouse down will lower the terrain.</p>
+
+		<h3 id="interactive-set-height">Interactive Set Height</h3>
+		<p>To use Interactive Set Height, hold Ctrl+LMB or Cmd+LMB on Mac, and drag up to move the terrain closer to the Set Height value.</p>
+
+		<h2 id="keyboard-shortcuts">Keyboard Shortcuts</h2>
+		<table>
+			<tr>
+				<th>Shortcut</th>
+				<th>Windows</th>
+				<th>Mac</th>
+			</tr>
+			<tr>
+				<td>Flatten All Terrain</td>
+				<td colspan="2">Shift+G</td>
+			</tr>
+			<tr>
+				<td>Grab (in Raise/Lower)</td>
+				<td>Ctrl+LMB</td>
+				<td>Cmd+LMB</td>
+			</tr>
+			<tr>
+				<td>Interactive Set Height (in Set Height)</td>
+				<td>Ctrl+LMB</td>
+				<td>Cmd+LMB</td>
+			</tr>
+		</table>
+
+		<h2 id="settings">Settings</h2>
+		<h3>Editor Brush Colour</h3>
+		<p>Colour of the brush. (The alpha value is also taken into account.)</p>
+
+		<h3>Show Brush Grid</h3>
+		<p>If checked, a grid will be visible while painting terrain. This is useful for gauging the height of the virtual plane that is used for determining where the brush is projected.</p>
+
+		<div class="dateWritten">Updated on September 11, 2014</div>
+	</div>
+	<div class="footer"><h3 class="author">Jesse Stiller</h3></div>
+</body>
+</html>

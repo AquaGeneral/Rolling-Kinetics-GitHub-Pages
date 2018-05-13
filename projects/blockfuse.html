@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rolling Kinetics - Block Fuse</title>
+	<link rel="stylesheet" type="text/css" href="../main.css">
+	<link rel="stylesheet" type="text/css" href="../projects/project.css">
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-36595920-2']);
+		_gaq.push(['_setDomainName', 'rollingkinetics.com']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+
+		function recordOutboundLink(link, category, action) {
+			try {
+				var myTracker=_gat._getTrackerByName();
+				_gaq.push(['myTracker._trackEvent', category , action ]);
+				setTimeout('document.location = "' + link.href + '"', 100)
+			}
+			catch(err){}
+		}
+	</script>
+</head>
+<body>
+	<div class="header">
+		<div class="headerDiv">
+			<div class="logo">
+				<a href="../index.html" class="logo"><h1 class="title">Rolling Kinetics</h1></a>
+				<span>Jesse Stiller's Personal Site</span>
+			</div>
+			<ul class="navigation">
+				<li class="navigation"><a href="../index.html" class="navigation">Home</a></li>
+				<li class="navigation"><a href="../blog.html" class="navigation">Blog</a></li>
+				<li class="navigation"><a href="../about.html" class="navigation">About</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="main">
+		<div class="project">
+			<div class="projectContent">
+				<div class="projectTitle">
+					<h2 class="projectTitle">Block Fuse</h2>
+				</div>
+				<div class="projectDescription">
+					<p class="projectDescription">Block Fuse is a game of trying to knock as many blocks onto the floor as possible.</p>
+					<a href="block_fuse/block_fuse_full.png"><img class="projectMain" src="block_fuse/block_fuse_half.png"/></a>
+					<p class="projectDescription">Block Fuse with <a href="https://www.assetstore.unity3d.com/en/#!/content/51515">Unity Cinematic Image Effects</a></p>
+				</div>
+			</div>
+			<div class="projectLinksSide">
+				<div class="projectLinksTitle">
+					<h2 class="projectLinksTitle">Links</h2>
+				</div>
+				<ul class="projectLinks">
+					<li class="projectLink"><a class="projectLink" href="http://u3d.as/content/jesse-stiller/block-fuse/1QN" target="blank">
+						Unity Asset Store
+					</a></li>
+					<li class="projectLink"><a class="projectLink" href="http://www.youtube.com/watch?v=aofBOz5mDE8" target="blank">
+						YouTube Video #1
+					</a></li>
+					<li class="projectLink"><a class="projectLink" href="http://www.kongregate.com/games/AquaGeneral/block-fuse" target="blank">
+						Block Fuse on Kongregate
+					</a></li>
+				</ul>
+				<div class="projectDownloadsTitle">
+					<h2 class="projectDownloadsTitle">Demo</h2>
+				</div>
+				<div class="projectDownloads">
+					<h3>
+						<a class="projectDownloads" href="https://s3.amazonaws.com/rollingkinetics_us/Block+Fuse_2.0_Windows.zip"
+						onClick="recordOutboundLink(this, 'File Download', 'BlockFuse_Windows Download')">
+							Windows (10.6 MB)
+						</a>
+					</h3>
+					<h3>
+						<a class="projectDownloads" href="https://s3.amazonaws.com/rollingkinetics_us/Block+Fuse_2.0_Mac.zip"
+						onClick="recordOutboundLink(this, 'File Download', 'BlockFuse_Mac Download')">
+							Mac OSX (12.6 MB)
+						</a>
+					</h3>
+					<h3>
+						<a class="projectDownloads" href="https://s3.amazonaws.com/rollingkinetics_us/Block+Fuse_2.0_Linux.zip"
+						onClick="recordOutboundLink(this, 'File Download', 'BlockFuse_Linux Download')">
+							Linux (13.5 MB)
+						</a>
+					</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+	<div class="footer"><h3 class="author">Jesse Stiller</h3></div>
+	</footer>
+</body>
+</html>

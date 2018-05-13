@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rolling Kinetics - Setting Up Unity and Git</title>
+	<link rel="stylesheet" type="text/css" href="../main.css">
+	<link rel="stylesheet" type="text/css" href="../blog/blog-post.css">
+	<link rel="stylesheet" type="text/css" href="2d-to-3d-mouse-position/2d-to-3d-mouse-position.css">
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-36595920-2']);
+		_gaq.push(['_setDomainName', 'rollingkinetics.com']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+<body>
+	<div class="header">
+		<div class="headerDiv">
+			<div class="logo">
+				<a href="../index.html" class="logo"><h1 class="title">Rolling Kinetics</h1></a>
+				<span>Jesse Stiller's Personal Site</span>
+			</div>
+			<ul class="navigation">
+				<li class="navigation"><a href="../index.html" class="navigation">Home</a></li>
+				<li class="navigation"><a href="../blog.html" class="navigation">Blog</a></li>
+				<li class="navigation"><a href="../about.html" class="navigation">About</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="blogTitle"><h1 class="blogTitle">Setting Up Unity to Work with Git</h1></div>
+	<div class="main">
+		<p>I thought all was well when I pushed <a class="blogPostLink" href="../projects/giantbomb-p3dv.html">GiantBomb: P3DV</a> to GitHub, but that wasn't the case; Unity wasn't setup correctly and neither was Git. At least from memory, there wasn't any source that mentioned specifically how to make Unity talk only a bit to Git rather than Unity handing over binary files.</p>
+		<p>Some of this was covered in the Unity Manual's <a class="blogPostLink" href="http://docs.unity3d.com/Documentation/Manual/ExternalVersionControlSystemSupport.html">Using External Version Control Systems</a> page; however, it is not aimed directly at setting up Git.</p>
+		<ol>
+		<li><p class="howTo">In Unity, click <b>Edit->Project Settings->Editor</b>.</p></li>
+		<li><p class="howTo">Set the <b>Version Control Mode</b> to <b>Meta Files</b>.</p></li>
+		<p class="howToNote"><i>The meta information for any asset is defaultly stored in a binary form. This includes things such as a texture's size, compression type, and filter mode.</i></p>
+		<li><p class="howTo">Set the <b>Asset Serialization Mode</b> to <b>Force Text</b>.</li>
+		<li><p class="howTo">Quit Unity.</p></li>
+		<img class="figure" src="../blog/unity-and-git/project-settings.png"></img>
+		<li><p class="howTo">Delete the <b>Library</b> folder from your current project's folder.</p></li>
+		<li><p class="howTo">Load Unity back up.</p></li>
+		<p class="howToNote"><i>You may notice Unity has generated <code>.meta</code> files for every asset. This is a good sign. It means that your project is now source-control-friendly - using text based metafiles instead of the binaries in the Library folder.</i></p>
+		<li><p class="howTo">Add the following to your <code>gitignore</code> file:</p></li>
+		<div class="code">
+			.DS_Store<br/>
+			Library<br/>
+			Temp<br/>
+			*.csproj<br/>
+			*.pidb<br/>
+			*.sln<br/>
+			*.userprefs<br/>
+			build<br/>
+			Assembly*<br/>
+		</div>
+		<li><p>Create your initial commit.</p></li>
+		<li>
+			<p>Make sure all changes have been committed before running the next command. Open up Terminal or Comamnd Prompt and enter the following command: </p>
+			<code>git rm -r --cached .</code>
+		</li>
+		<li><p>Commit the newly deleted files.</p></li>
+		</ol>
+		<p>Now you are free to enjoy the wonderous power of Git!</p>
+		<div class="dateWritten">Last Modified: February 3, 2014.</div>
+	</div>
+	<div class="footer"><h3 class="author">Jesse Stiller</h3></div>
+</body>
+</html>

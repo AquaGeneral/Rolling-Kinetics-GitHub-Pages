@@ -1,0 +1,37 @@
+div.aboutMe {
+	width: 900px;
+	margin: 0 auto;
+}
+
+h2.aboutMe {
+	margin: 20px 0px 5px 0px;
+}
+
+p {
+	margin: 0px 0px 10px 9px;
+}
+
+table {
+	margin: 0px 0px 0px 9px;
+}
+
+td.heading {
+	width: 85px;
+	font-weight: bold;
+}
+
+a.contact {
+	color: #FA0;
+}
+
+a.contact:visited{
+	color: #FF7A12;
+}
+
+a.personalLink {
+	color: #00C738;
+}
+
+a.personalLink:visited {
+	color: #0B862A;
+}

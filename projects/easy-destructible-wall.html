@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rolling Kinetics - Easy Destructible Wall</title>
+	<link rel="stylesheet" type="text/css" href="../main.css">
+	<link rel="stylesheet" type="text/css" href="../projects/project.css">
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-36595920-2']);
+		_gaq.push(['_setDomainName', 'rollingkinetics.com']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+
+		function recordOutboundLink(link, category, action) {
+			try {
+				var myTracker=_gat._getTrackerByName();
+				_gaq.push(['myTracker._trackEvent', category , action ]);
+				setTimeout('document.location = "' + link.href + '"', 100)
+			}
+			catch(err){}
+		}
+	</script>
+</head>
+<body>
+	<div class="header">
+		<div class="headerDiv">
+			<div class="logo">
+				<a href="../index.html" class="logo"><h1 class="title">Rolling Kinetics</h1></a>
+				<span>Jesse Stiller's Personal Site</span>
+			</div>
+			<ul class="navigation">
+				<li class="navigation"><a href="../index.html" class="navigation">Home</a></li>
+				<li class="navigation"><a href="../blog.html" class="navigation">Blog</a></li>
+				<li class="navigation"><a href="../about.html" class="navigation">About</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="main">
+		<div class="project">
+			<div class="projectContent">
+				<div class="projectTitle">
+					<h2 class="projectTitle">Easy Destructible Wall</h2>
+				</div>
+				<div class="projectDescription"><p class="projectDescription">Easy Destructible Wall is a simple way to add a destructible wall to&mdash;literally&mdash;any Unity project. All existing rigidbodies in a scene are able to begin breaking the wall without any setting up.</p>
+					<a href="easy_destructible_wall/edw_full.png"><img class="projectMain" src="easy_destructible_wall/edw_half.png"/></a>
+				</div>
+			</div>
+			<div class="projectLinksSide">
+				<div class="projectLinksTitle">
+					<h2 class="projectLinksTitle">Links</h2>
+				</div>
+				<ul class="projectLinks">
+					<li class="projectLink"><a class="projectLink" href="http://u3d.as/content/jesse-stiller/easy-destructible-wall/1zX" target="blank">
+						Unity Asset Store
+					</a></li>
+					<li class="projectLink"><a class="projectLink" href="http://www.youtube.com/watch?v=xrBX-RLh13Y" target="blank">
+						YouTube Video #1
+					</a></li>
+				</ul>
+				<div class="projectDownloadsTitle">
+					<h2 class="projectDownloadsTitle">Demo</h2>
+				</div>
+				<div class="projectDownloads">
+					<h3><a class="projectDownloads" href="https://s3.amazonaws.com/rollingkinetics_us/EasyDestructibleWall_Demo_Win_r1.zip"
+						onClick="recordOutboundLink(this, 'File Download', 'EasyDestructibleWall_Windows Download')">Windows (6.7 MB)</a></h3>
+					<h3><a class="projectDownloads" href="https://s3.amazonaws.com/rollingkinetics_us/EasyDestructibleWall_Demo_Mac_r1.app.zip"
+						onClick="recordOutboundLink(this, 'File Download', 'EasyDestructibleWall_Mac Download')">Mac OSX (7.3 MB)</a></h3>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+	<div class="footer"><h3 class="author">Jesse Stiller</h3></div>
+	</footer>
+</body>
+</html>

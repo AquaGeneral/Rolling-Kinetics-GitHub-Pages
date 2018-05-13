@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rolling Kinetics - 2D Position to 3D Position with Velocity</title>
+	<link rel="stylesheet" type="text/css" href="../main.css">
+	<link rel="stylesheet" type="text/css" href="../blog/blog-post.css">
+	<link rel="stylesheet" type="text/css" href="../blog/bits.css">
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-36595920-2']);
+		_gaq.push(['_setDomainName', 'rollingkinetics.com']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+<body onload="updateTable()">
+	<div class="header">
+		<div class="headerDiv">
+			<div class="logo">
+				<a href="../index.html" class="logo"><h1 class="title">Rolling Kinetics</h1></a>
+				<span>Jesse Stiller's Personal Site</span>
+			</div>
+			<ul class="navigation">
+				<li class="navigation"><a href="../index.html" class="navigation">Home</a></li>
+				<li class="navigation"><a href="../blog.html" class="navigation">Blog</a></li>
+				<li class="navigation"><a href="../about.html" class="navigation">About</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="blogTitle"><h1 class="blogTitle">Bits</h1></div>
+	<div class="main">
+		<span>
+			Bits: 
+			<input id="bits" type="number" value="32" min="1" onchange="updateTable()" />
+            Number of exponent bits:
+            <input id="exponentBitCount" type="number" value="8" min="1" max="32" onchange="updateTable()"/>
+            
+			<table id="bitTable">
+                <th>Bits</th>
+                <tr id="bitCategoryRow">
+                    <td id="signCell">Sign</td>
+                    <td id="exponentCell">Exponent</td>
+                    <td id="mantissaCell">Mantissa</td>
+                </tr>
+				<tr id="bitIndexRow"/>
+                <tr id="bitValueRow"/>
+			</table>
+            
+            <script>
+				function updateTable() {
+                    var bitCategoryRow = document.getElementById("bitCategoryRow");
+                    var bitIndexRow = document.getElementById("bitIndexRow");
+                    var bitValueRow = document.getElementById("bitValueRow");
+                    var bits = document.getElementById("bits").value;
+                    var exponentBitCount = document.getElementById("exponentBitCount").value;
+                    
+                    var mantissaBitCount = bits - exponentBitCount - 1;
+                    
+                    for(var i = bitIndexRow.cells.length - 1; i >= 0; i--) {
+                        bitIndexRow.deleteCell(0);
+                        bitValueRow.deleteCell(0);
+                    }
+                                        
+                    var exponentCell = document.getElementById("exponentCell");
+                    exponentCell.colSpan = exponentBitCount;
+                    
+                    var mantissaCell = document.getElementById("mantissaCell");
+                    mantissaCell.colSpan = mantissaBitCount;
+                    
+                    // Exponent cells
+                    for(var e = 0; e < exponentBitCount; e++) {
+                        
+                    }
+                    
+                    for(var i = 0; i < bits; i++) {
+                        var headerCell = bitIndexRow.insertCell(i);
+                        headerCell.innerHTML = i + 1;
+                        
+                        var valueCell = bitValueRow.insertCell(i);
+                        valueCell.innerHTML = Math.pow(2, i);
+                    }
+				}
+			</script>
+		</span>
+	</div>
+	<div class="footer"><h3 class="author">Jesse Stiller</h3></div>
+</body>
+</html>
